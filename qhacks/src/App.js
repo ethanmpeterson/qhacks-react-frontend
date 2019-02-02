@@ -8,8 +8,12 @@ import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import base64 from 'base64-img';
 
-const endpoint = "http://localhost:3000/upload"
+const baseURL = "http://localhost:3000/"
 
+const endpoint = "http://localhost:3000/upload"
+const computeEnd = "http://localhost:3000/compute/"
+
+const test = baseURL + "compute?min_dist=1&min_width=1&voltage=1&current=1"
 
 class App extends Component {
   constructor(props) {
@@ -44,6 +48,25 @@ class App extends Component {
         }
       });
 
+      //const query = baseURL + "compute?min_dist=" + this.state.min_dist + "&min_width=" + this.state.min_width + "&voltage=" + this.state.voltage + "&current=" + this.state.current;
+  }
+
+  handleCompute = () => {
+    console.log("Compute clicked")
+    console.log(this.state);
+    axios.post("http://localhost:3000/compute/", {
+      min_dist: this.state.min_dist,
+      min_width: this.state.min_width,
+      voltage: this.state.voltage,
+      current: this.state.current
+    }).then(response => {
+      console.log(response);
+      this.setState({
+        viableCurrent: response.data.currentRating
+      });
+    }).catch(function (err) {
+      console.log(err);
+    });
   }
 
   handleClick = () => {
@@ -119,7 +142,13 @@ class App extends Component {
         </div>
         <div>
           <p></p>
-          <Button color='primary' onClick={this.handleUpload}>Compute</Button>
+          <Button color='primary' onClick={this.handleUpload}>Render PCB</Button>
+        </div>
+        <div>
+          <Button color='primary' onClick={this.handleCompute}>TEST</Button>
+        </div>
+        <div>
+          {this.state.viableCurrent ? <p>Viable Current: {this.state.viableCurrent}</p>: null}
         </div>
         {
           this.state.displayImage ? 
