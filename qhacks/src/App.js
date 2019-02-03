@@ -37,7 +37,7 @@ class App extends Component {
       .post(endpoint, data, {
         onUploadProgress: ProgressEvent => {
           this.setState({
-            loaded: (ProgressEvent.loaded / ProgressEvent.total*100),
+            loaded: (ProgressEvent.loaded / ProgressEvent.total * 100),
           })
         },
       })
@@ -62,7 +62,8 @@ class App extends Component {
     }).then(response => {
       console.log(response);
       this.setState({
-        viableCurrent: response.data.currentRating
+        viableCurrent: response.data.currentRating,
+        data: response.data
       });
     }).catch(function (err) {
       console.log(err);
@@ -92,7 +93,7 @@ class App extends Component {
           <p>Welcome to <code>CircuitSafe</code>✔</p>
         </header>
         <div>
-          <p>Measurements mil</p>
+          <p>Measurements in mil (thousandth of an inch)</p>
           <p>Voltage in Volts and Current is given in Amperes</p>
         </div>
         <div>
@@ -145,10 +146,19 @@ class App extends Component {
           <Button color='primary' onClick={this.handleUpload}>Render PCB</Button>
         </div>
         <div>
-          <Button color='primary' onClick={this.handleCompute}>TEST</Button>
+          <Button color='primary' onClick={this.handleCompute}>Compute Values</Button>
         </div>
         <div>
-          {this.state.viableCurrent ? <p>Viable Current: {this.state.viableCurrent}</p>: null}
+          {
+            this.state.viableCurrent ?
+            <div>
+              <p>Viable Current: {this.state.data.viableCurrent} A</p>
+              <p>Electric Field: {this.state.data.electricField} N/C</p>
+              <p>Signal Velocity: {this.state.data.signalSpeed} m/s</p>
+              <p>Propagation Delay: {this.state.data.propDelay} S</p>
+            </div>
+            : null
+            }
         </div>
         {
           this.state.displayImage ? 
