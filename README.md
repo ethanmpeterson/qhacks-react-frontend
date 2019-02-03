@@ -17,5 +17,6 @@ I will continue the development of this as a side project and collect more data 
 
 ### Demo Images
 
-[Imgur](https://i.imgur.com/8k72Ffa.png)
-[Imgur](https://i.imgur.com/OM2ggEA.png)
+![Imgur](https://i.imgur.com/8k72Ffa.png)
+
+![Imgur](https://i.imgur.com/OM2ggEA.png)
