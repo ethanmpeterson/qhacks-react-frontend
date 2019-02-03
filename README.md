@@ -14,3 +14,8 @@ CircuitSafe is my QHacks which takes a binary PCB gerber file and some numerical
 ### What's Next for CircuitSafe
 
 I will continue the development of this as a side project and collect more data from the gerber files themselves using less user input.
+
+### Demo Images
+
+[Imgur](https://i.imgur.com/8k72Ffa.png)
+[Imgur](https://i.imgur.com/OM2ggEA.png)
